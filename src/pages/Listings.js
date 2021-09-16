@@ -1,28 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import listingContent from "./listing-content";
-import ListingsComponent from "../components/ListingsComponent";
+
+import { ShowListings } from "../components/ShowListings";
 
 const Listings = () => {
-  const isEdibelOrNot = (listing) => {
-    //TODO fix!
-    if (listing.edibel === true) {
-      <p>Edibel</p>;
-    } else {
-      <p>Not edibel</p>;
-    }
-    return isEdibelOrNot;
-  };
   return (
     <>
-      <h1 className="sm:text-4xl text-2xl font-bold mt-6 mb-6 text-gray-900">
+      <h1 className="text-center sm:text-4xl text-2xl mt-6 mb-8 text-green-900 font-semibold ">
         Listings
       </h1>
-      <div className="container py-4 mx-auto">
-        <div className="flex flex-wrap -m-4">
-          <ListingsComponent listings={listingContent} />
-        </div>
-      </div>
+
+      <ShowListings />
     </>
   );
 };
