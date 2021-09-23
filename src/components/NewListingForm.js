@@ -46,6 +46,7 @@ const NewListingsForm = () => (
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             name="title"
             value={values.title}
+            placeholder="Name..."
           />
           {errors.title && touched.title ? <div>{errors.title}</div> : null}
 
@@ -63,15 +64,21 @@ const NewListingsForm = () => (
 
           <label htmlFor="description">Description</label>
           <Field
-            className="shadow appearance-none border rounded w-full py-20 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+            className="shadow appearance-none border rounded w-full h-24 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
             name="description"
             value={values.description}
+            placeholder="Description..."
           />
           {errors.description && touched.description ? (
             <div>{errors.description}</div>
           ) : null}
 
-          <label htmlFor="edibel">Edibel</label>
+          {values.edibel ? (
+            <label htmlFor="edibel">Edibel</label>
+          ) : (
+            <label htmlFor="edibel">Edibel?</label>
+          )}
+
           <Field
             className="border rounded gray-700 focus:outline-none focus:shadow-outline m-6"
             type="checkbox"

@@ -3,17 +3,29 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+import DeleteModal from "./DeleteModal";
+
 function ListingCard({ data }) {
   const { _id, title, image, description, edibel } = data;
   const history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
 
   //TODO: clear deleted listing
-  const handleDelte = (value) => {
+  const handleDelete = (value) => {
     console.log(value);
     axios.delete(`http://localhost:8000/listings/${_id}`).then(() => {
       alert("The listing was sucessfully deleted!");
+      setIsOpen(false);
       history.push("/listings");
     });
+  };
+
+  const handleDeleteClicked = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
   function handleUpdate() {
@@ -67,11 +79,14 @@ function ListingCard({ data }) {
           className="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white py-1 px-2 rounded m-4 self-auto "
           value={_id}
           key={_id}
-          onClick={handleDelte}
+          onClick={handleDeleteClicked}
         >
           Delete
         </button>
       </div>
+      {isOpen && (
+        <DeleteModal handleDelete={handleDelete} handleClose={handleClose} />
+      )}
     </div>
   );
 }
@@ -99,10 +114,5 @@ export function ShowListings() {
     </div>
   );
 }
-
-export const deleteListing = async (_id) => {
-  const { data } = await axios.delete(`http://localhost:8000/listings/${_id}`);
-  return data;
-};
 
 export default ListingCard;
